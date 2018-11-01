@@ -12,13 +12,8 @@ const fsWriteFile = util.promisify(fs.writeFile);
 const MANIFEST_FILE = 'asset-manifest.json';
 
 // TODO
-// X hashStrategy: 'folder' -> subdirectory === digest(parentDirectory)
 // documentation
 // testing - unit and mocks
-// metadata
-// only upload what has changed
-// cli tool? (separate module?)
-// config via file?
 
 class GCS {
   constructor(options) {

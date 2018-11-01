@@ -21,14 +21,11 @@
   ],
   "dependencies": {
     "@google-cloud/storage": "^2.1.0",
-    "digest-directory": "0.0.2",
-    "directory-metadata": "0.0.1",
-    "file-digest": "0.0.1",
-    "p-queue": "^3.0.0",
-    "p-retry": "^2.0.0",
-    "progress": "^2.0.1",
+    "digest-directory": "^0.0.2",
+    "directory-metadata": "^0.0.1",
+    "file-digest": "^0.0.3",
     "recursive-readdir": "^2.2.2",
-    "smart-cq": "0.0.1"
+    "smart-cq": "^0.0.1"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",

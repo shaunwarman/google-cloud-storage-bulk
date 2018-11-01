@@ -37,14 +37,35 @@ yarn add google-cloud-storage-bulk
 ## Usage
 
 ```js
-const GoogleCloudStorageBatch = require('google-cloud-storage-bulk');
+const GCS = require('google-cloud-storage-bulk');
 
-const googleCloudStorageBatch = new GoogleCloudStorageBatch();
+const gcs = new GCS({
+  projectId,
+  bucketName: 'my-bucket',
+  concurrency: 100,
+  hashStrategy: 'file',
+  retries: 3,
+  subdirectory: 'application-name',
+  uploadOptions = {}
+});
 
-console.log(googleCloudStorageBatch.renderName());
-// script
+// ... in async function
+await gcs.uploadFiles(someDirectory);
 ```
 
+## Options
+* `projectId` - (`required`) - google cloud project id
+* `bucketName` - (`required`) - cloud storage bucket name
+* `concurrency` - (`optional` - default: `250`) - upload concurrency limits
+* `retries` - (`optional` - default: `3`) - upload retry attempts
+* `hashStrategy` - (`required` - options: `none`, `file`, `subdirectory`) - described in detail below
+* `subdirectory` - (`optional`) - subdirectory within cloud storage bucket to push content into
+* `uploadOptions` - (`optional`) - extends cloud-storage upload options
+
+#### `hashStrategy`
+* `none`
+* `file`
+* `subdirectory`
 
 ## Contributors
 
