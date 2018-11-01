@@ -11,10 +11,6 @@ const fsWriteFile = util.promisify(fs.writeFile);
 
 const MANIFEST_FILE = 'asset-manifest.json';
 
-// TODO
-// documentation
-// testing - unit and mocks
-
 class GCS {
   constructor(options) {
     const {

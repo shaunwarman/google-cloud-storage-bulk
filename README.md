@@ -16,6 +16,7 @@
 * [Install](#install)
 * [Usage](#usage)
 * [Options](#options)
+  * [hashStrategy](#hashstrategy)
 * [Contributors](#contributors)
 * [License](#license)
 
@@ -61,14 +62,17 @@ await gcs.uploadFiles(someDirectory);
 * `bucketName` - (`required`) - cloud storage bucket name
 * `concurrency` - (`optional` - default: `250`) - upload concurrency limits
 * `retries` - (`optional` - default: `3`) - upload retry attempts
-* `hashStrategy` - (`required` - options: `none`, `file`, `subdirectory`) - [described in detail below](#hashStrategy)
+* `hashStrategy` - (`required` - options: `none`, `file`, `subdirectory`) - [described in detail below](#hashstrategy)
 * `subdirectory` - (`optional`) - subdirectory within cloud storage bucket to push content into
 * `uploadOptions` - (`optional`) - extends [`@google/cloud-storage` upload options](https://cloud.google.com/nodejs/docs/reference/storage/2.0.x/Bucket#upload)
 
-#### `hashStrategy`
+### `hashStrategy`
 
-* `none` - No hashing to file structure, just push content as is. Google cloud does [handle metageneration](https://cloud.google.com/storage/docs/object-versioning#details) that you can take advantage of for versioning.
-```
+#### `none`
+
+No hashing to file structure, just push content as is. Google cloud does [handle metageneration](https://cloud.google.com/storage/docs/object-versioning#details) that you can take advantage of for versioning.
+
+```sh
 Before:
 |_directory_to_upload
   |_a.js
@@ -82,8 +86,11 @@ After:
   |_c.css
 ```
 
-* `file` - Hash per file currently using `sha1` algorithm.
-```
+#### `file`
+
+Hash per file currently using `sha1` algorithm.
+
+```sh
 Before:
 |_directory_to_upload
   |_a.js
@@ -98,8 +105,11 @@ After:
   |_asset-manifest.json <-- references initial file to their new hash complement
 ```
 
-* `subdirectory` - Hash content of the directory being uploaded and use this directory hash as the bucket subdirectory.
-```
+#### `subdirectory`
+
+Hash content of the directory being uploaded and use this directory hash as the bucket subdirectory.
+
+```sh
 Before:
 |_directory_to_upload
   |_a.js
