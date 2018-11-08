@@ -24,6 +24,8 @@ class GCS {
     } = options;
     // Static asset references and their associated hash
     this.assets = {};
+    // Concurrency limit during upload
+    this.concurrency = concurrency;
     // Cloud storage bucket name
     this.bucketName = bucketName;
     // Files to be uploaded
@@ -34,6 +36,8 @@ class GCS {
     this.metadata = null;
     // Parent directory of uploaded assets
     this.parentDirectory = null;
+    // Upload retries per file
+    this.retries = retries;
     // Cloud storage sdk
     this.storage = new Storage({ projectId });
     // Subdirectory within cloud storage bucket to write to
@@ -82,8 +86,12 @@ class GCS {
 
       // Create upload list from source and destination of files
       const uploadList = formattedFiles.map(this.upload.bind(this));
-
-      await promiseAll(uploadList, { concurrency, retries });
+      
+      // Upload all files
+      await promiseAll(uploadList, { 
+        concurrency: this.concurrency, 
+        retries: this.retries 
+      });
     } catch (err) {
       console.error('error uploading files', err);
       throw err;
