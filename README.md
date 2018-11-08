@@ -48,7 +48,7 @@ const gcs = new GCS({
   hashStrategy: 'file',
   retries: 3,
   subdirectory: 'application-name',
-  uploadOptions = {}
+  uploadOptions: {}
 });
 
 // ... in async function

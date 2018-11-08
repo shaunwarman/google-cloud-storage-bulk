@@ -73,7 +73,6 @@ class GCS {
       const formattedFiles = await Promise.all(formatFiles);
 
       if (this.hashStrategy === 'file') {
-        // TODO how do we version asset-manifest.json?
         const assetManifest = await this.createAssetManifest();
         formattedFiles.push(assetManifest);
       }
