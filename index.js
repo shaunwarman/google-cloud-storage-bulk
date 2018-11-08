@@ -4,7 +4,7 @@ const util = require('util');
 const digestFile = require('file-digest');
 const digestDirectory = require('digest-directory');
 const readdir = require('recursive-readdir');
-const SmartQueue = require('smart-cq');
+const promiseAll = require('promise-all-retry');
 const { Storage } = require('@google-cloud/storage');
 
 const fsWriteFile = util.promisify(fs.writeFile);
@@ -34,8 +34,6 @@ class GCS {
     this.metadata = null;
     // Parent directory of uploaded assets
     this.parentDirectory = null;
-    // Smart concurrent queue
-    this.queue = new SmartQueue({ concurrency, retries });
     // Cloud storage sdk
     this.storage = new Storage({ projectId });
     // Subdirectory within cloud storage bucket to write to
@@ -85,14 +83,12 @@ class GCS {
       // Create upload list from source and destination of files
       const uploadList = formattedFiles.map(this.upload.bind(this));
 
-      // Queue and upload static content
-      for (const upload of uploadList) {
-        this.queue.enqueue(upload);
-      }
+      await promiseAll(uploadList, { concurrency, retries });
     } catch (err) {
       console.error('error uploading files', err);
       throw err;
     }
+    return this.assets;
   }
 
   /**

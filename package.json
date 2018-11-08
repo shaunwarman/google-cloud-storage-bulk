@@ -20,12 +20,12 @@
     "Shaun Warman <shaunwarman1@gmail.com> (https://shaunwarman.com)"
   ],
   "dependencies": {
-    "@google-cloud/storage": "^2.1.0",
+    "@google-cloud/storage": "^2.3.0",
     "digest-directory": "^0.0.2",
     "directory-metadata": "^0.0.1",
     "file-digest": "^0.0.3",
-    "recursive-readdir": "^2.2.2",
-    "smart-cq": "^0.0.1"
+    "promise-all-retry": "0.0.1",
+    "recursive-readdir": "^2.2.2"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
@@ -38,10 +38,10 @@
     "eslint-config-xo-lass": "^1.0.3",
     "eslint-plugin-prettier": "latest",
     "fixpack": "latest",
-    "husky": "latest",
+    "husky": "^1.1.3",
     "lint-staged": "latest",
     "nyc": "latest",
-    "prettier": "latest",
+    "prettier": "^1.15.1",
     "remark-cli": "latest",
     "remark-preset-github": "latest",
     "xo": "latest"
